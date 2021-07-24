@@ -25,7 +25,7 @@ public class MovePlayer : MonoBehaviour
         if (Input.GetKey("left"))
         {
             _rb.AddForce(new Vector2(-speed * Time.deltaTime, 0));
-          
+            
         }
 
         if (Input.GetKey("right"))
