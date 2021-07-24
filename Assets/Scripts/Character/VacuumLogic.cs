@@ -11,10 +11,13 @@ public class VacuumLogic : MonoBehaviour
     public PlayerMovement movement;
 
     public ParticleSystem vacuumParticles;
+    public Animator playerAnimator;
 
     private PolygonCollider2D _vacuumCollider;
 
     private bool stuck = false;
+
+    private bool punching = false;
     #endregion
 
     private void Start()
@@ -38,6 +41,12 @@ public class VacuumLogic : MonoBehaviour
                 movement.movementSpeed /= vacumSpeedReduce;
                 _vacuumCollider.enabled = false;
                 vacuumParticles.Stop();
+            }
+
+            if (Input.GetButton("Fire") && !punching)
+            {
+                playerAnimator.SetTrigger("Attacking");
+                movement.disableMomvement = true;
             }
         }
     }

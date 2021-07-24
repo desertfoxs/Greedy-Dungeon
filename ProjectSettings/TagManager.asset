@@ -10,7 +10,6 @@ TagManager:
   - Ghost
   - Detector
   - Gema
-
   layers:
   - Default
   - TransparentFX
@@ -18,9 +17,9 @@ TagManager:
   - Player
   - Water
   - UI
-  - Level
   - Vacuum
-  - 
+  - Level
+  - PlayerHit
   - 
   - 
   - 
