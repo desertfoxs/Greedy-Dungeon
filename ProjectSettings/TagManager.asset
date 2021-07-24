@@ -5,18 +5,25 @@ TagManager:
   serializedVersion: 2
   tags:
   - Vcam
+  - Suckable
+  - Vacuum
   - Ghost
   - Detector
   - Gema
+
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
+<<<<<<< HEAD
   - Enemy
+=======
+  - Player
+>>>>>>> e910b9237046f131d25e38079af1a5d97fcf3f79
   - Water
   - UI
   - Level
-  - 
+  - Vacuum
   - 
   - 
   - 
