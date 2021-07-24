@@ -6,15 +6,17 @@ TagManager:
   tags:
   - Camera
   - Vcam
+  - Suckable
+  - Vacuum
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - Level
-  - 
+  - Vacuum
   - 
   - 
   - 

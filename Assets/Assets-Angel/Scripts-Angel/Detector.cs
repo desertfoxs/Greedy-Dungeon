@@ -19,7 +19,7 @@ public class Detector : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.transform.tag == "Player")
+        if (col.gameObject.tag == "Player")
         {
             
             _manager.CambioDeSala(id);

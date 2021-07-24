@@ -54,10 +54,6 @@ public class PlayerMovement : MonoBehaviour
                 _inputBuffer.Dequeue();
             }
         }
-        else
-        {
-            Debug.Log("NOT GROUNDED!");
-        }
 
         float smoothedMovementFactor = controller.isGrounded ? groundDamping : inAirDamping; // how fast do we change direction?
         _movement.x = Mathf.Lerp(_movement.x, horDir * movementSpeed, Time.deltaTime * smoothedMovementFactor);
@@ -80,6 +76,7 @@ public class PlayerMovement : MonoBehaviour
 
     void RemoveAction()
     {
-        _inputBuffer.Dequeue();
+        if (_inputBuffer.Count > 0)
+            _inputBuffer.Dequeue();
     }
 }
