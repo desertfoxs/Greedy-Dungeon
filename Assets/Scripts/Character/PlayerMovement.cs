@@ -56,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            Debug.Log("NOT GROUNDED!");
+            //Debug.Log("NOT GROUNDED!");
         }
 
         float smoothedMovementFactor = controller.isGrounded ? groundDamping : inAirDamping; // how fast do we change direction?
