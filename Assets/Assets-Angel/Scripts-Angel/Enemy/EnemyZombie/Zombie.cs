@@ -8,6 +8,8 @@ public class Zombie : MyEnemy
    
     private NavMeshAgent _agente;
     private Transform _initialPosition;
+    private bool _attack = false;
+
 
     private void Awake()
     {
@@ -23,32 +25,33 @@ public class Zombie : MyEnemy
         _initialPosition = gameObject.GetComponent<Transform>();
 
         _player = GameObject.FindGameObjectWithTag("Player");
+        _rb = gameObject.GetComponent<Rigidbody2D>();
+
         //_animator = gameObject.GetComponent<Animator>();
         //_renderer = gameObject.GetComponent<SpriteRenderer>();
-        _rb = gameObject.GetComponent<Rigidbody2D>();
     }
-    
+
 
     private void Update()
     {
-        
-        if (IsInPersonalSpace())
+
+
+        if (IsInPersonalSpace() && !_attack)
         {
-            
-            CanSeePlayer();
             _agente.SetDestination(_player.transform.position);
-            
         }
         else
         {
-            _agente.SetDestination(_initialPosition.position);
-            CanSeePlayer();
+            if (!_attack)
+            {
+                Debug.Log("vuelve a casa");
+                _agente.SetDestination(_initialPosition.position);
+            }
         }
 
-       
+        CanSeePlayer();
         if (CanSeePlayer())
-        {
-            
+        {     
             transform.rotation = _player.transform.position.x > transform.position.x ? Quaternion.Euler(0, -180, 0) : Quaternion.Euler(0, 0, 0);
         }
             
@@ -57,7 +60,7 @@ public class Zombie : MyEnemy
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.transform.tag == "Player")
+        if(collision.transform.tag == "Player" && !_attack)
         {  
             StartCoroutine(Attack(stats.attackDelay));
         }
@@ -65,12 +68,15 @@ public class Zombie : MyEnemy
 
     protected IEnumerator Attack(float Time)
     {
-        
+        _attack = true;
         //ataque al jugador
       
         _agente.SetDestination(transform.position);
-        yield return new WaitForSeconds(Time);        
-        _agente.SetDestination(_player.transform.position);
+        yield return new WaitForSeconds(Time);
+
+        _attack = false;
+      
+
         yield return null;
     }
 
