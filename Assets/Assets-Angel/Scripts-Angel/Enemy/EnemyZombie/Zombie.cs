@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class Zombie : MyEnemy
 {
    
+
     private NavMeshAgent _agente;
     private Transform _initialPosition;
     private bool _attack = false;
@@ -13,20 +14,21 @@ public class Zombie : MyEnemy
 
     private void Awake()
     {
-        _agente = GetComponent<NavMeshAgent>();            
+        _agente = GetComponent<NavMeshAgent>();
+        
     }
 
 
     void Start()
     {
+        _initialPosition = gameObject.GetComponent<Transform>();
         _agente.updateRotation = false;
         _agente.updateUpAxis = false;
-
-        _initialPosition = gameObject.GetComponent<Transform>();
 
         _player = GameObject.FindGameObjectWithTag("Player");
         _rb = gameObject.GetComponent<Rigidbody2D>();
 
+        
         //_animator = gameObject.GetComponent<Animator>();
         //_renderer = gameObject.GetComponent<SpriteRenderer>();
     }
@@ -44,8 +46,9 @@ public class Zombie : MyEnemy
         {
             if (!_attack)
             {
-                Debug.Log("vuelve a casa");
+                
                 _agente.SetDestination(_initialPosition.position);
+               
             }
         }
 
