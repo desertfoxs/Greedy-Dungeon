@@ -19,7 +19,7 @@ public class SalaScritp : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("entro a la sala" + id);
+       
 
         if (collision.transform.tag == "Player")
         {
