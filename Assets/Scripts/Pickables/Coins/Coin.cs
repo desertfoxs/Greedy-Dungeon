@@ -7,6 +7,7 @@ public class Coin : MonoBehaviour
     #region properties and fields
 
     public float moveSpeed = 1f;
+    public float rotSpeed = 2f;
     public float stopMovingTime = .3f;
     public float destroyDistance = 1f;
 
@@ -23,7 +24,7 @@ public class Coin : MonoBehaviour
             Vector3 vectorToTarget = _suckCenter - transform.position;
             float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg;
             Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
-            transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * moveSpeed);
+            transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * rotSpeed);
 
             if (Vector3.Distance(transform.position, _suckCenter) < destroyDistance)
             {

@@ -8,16 +8,20 @@ TagManager:
   - Ghost
   - Detector
   - Gema
+  - Enemy
   - Suckable
   - Vacuum
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Enemy
+  - Player
   - Water
   - UI
+  - Vacuum
   - Level
+  - PlayerAttack
+  - Enemy
   - Detector
   - Sala
   - 
