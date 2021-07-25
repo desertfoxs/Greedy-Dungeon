@@ -41,6 +41,10 @@ public class MyEnemy : MonoBehaviour
 
     protected bool _waitForHurt = false;
 
+    public float pushForce = 1f;
+    public float pushVelocity = 1f;
+    private Vector3 _pushBackPosition;
+    protected bool _pushBack = false;
  
 
     private void Start()
@@ -61,6 +65,11 @@ public class MyEnemy : MonoBehaviour
 
         if (CanSeePlayer())
             transform.rotation = _player.transform.position.x < transform.position.x ? Quaternion.Euler(0, -180, 0) : Quaternion.Euler(0, 0, 0);
+
+        if (_pushBack)
+        {
+            transform.position = Vector3.Lerp(transform.position, _pushBackPosition, pushVelocity * Time.deltaTime);
+        }
     }
 
 
@@ -97,19 +106,28 @@ public class MyEnemy : MonoBehaviour
 
     ////////////////// Hurt Methods //////////////////////
 
-    public virtual void GetHit()
+    public void PushBack(Vector3 attackDir)
+    {
+        _pushBack = true;
+        _pushBackPosition = transform.position + (attackDir * pushForce);
+    }
+
+    public virtual void GetHit(bool damage)
     {
         if (!_waitForHurt)
         {
             _waitForHurt = true;
-            stats.enemyHealth -= 1;
 
+            if (damage)
+                stats.enemyHealth -= 1;
 
             if (stats.enemyHealth <= 0)
                 Die();
 
             //else
                 //_animator.SetTrigger("hurt");
+
+            StartCoroutine(FinishInvulnerability(1f));
         }
     }
 
@@ -164,6 +182,14 @@ public class MyEnemy : MonoBehaviour
         needsWanderDirection = false;
         yield return new WaitForSeconds(time);
         needsWanderDirection = true;
+    }
+
+    protected IEnumerator FinishInvulnerability(float time)
+    {
+        _waitForHurt = false;
+        yield return new WaitForSeconds(time);
+        _waitForHurt = true;
+        _pushBack = false;
     }
 }
 

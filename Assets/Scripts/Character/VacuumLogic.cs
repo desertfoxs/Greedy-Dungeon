@@ -8,14 +8,18 @@ public class VacuumLogic : MonoBehaviour
 
     public float vacumSpeedReduce = 0.8f;
     public GameObject vacuumPoint;
+    public GameObject stuckPos;
     public PlayerMovement movement;
 
     public ParticleSystem vacuumParticles;
     public Animator playerAnimator;
 
+    public bool sucking = false;
+
     private PolygonCollider2D _vacuumCollider;
 
     private bool stuck = false;
+    private Gem _gem;
 
     private bool punching = false;
     #endregion
@@ -32,22 +36,77 @@ public class VacuumLogic : MonoBehaviour
         {
             if (Input.GetButtonDown("Suck"))
             {
-                movement.movementSpeed *= vacumSpeedReduce;
-                _vacuumCollider.enabled = true;
-                vacuumParticles.Play();
+                StartSucking();
             }
             else if (Input.GetButtonUp("Suck"))
             {
-                movement.movementSpeed /= vacumSpeedReduce;
-                _vacuumCollider.enabled = false;
-                vacuumParticles.Stop();
+                StopSucking();
             }
 
             if (Input.GetButton("Fire") && !punching)
             {
-                playerAnimator.SetTrigger("Attacking");
-                movement.disableMomvement = true;
+                if (movement.IsAttackingDown())
+                    playerAnimator.SetTrigger("DownAttack");
+
+                else
+                    playerAnimator.SetTrigger("Attacking");
+
+                punching = true;
             }
         }
+
+        else
+        {
+            if (Input.GetButton("Fire"))
+            {
+                punching = true;
+                movement.movementSpeed *= vacumSpeedReduce;
+                StopSucking();
+                bool right = movement.gameObject.transform.localScale.x > 0;
+                _gem.FireGem(right ? Vector3.right : Vector3.left);
+
+                stuck = false;
+                _gem = null;
+                punching = false;
+            } 
+        }
     }
+
+    private void StartSucking()
+    {
+        sucking = true;
+        movement.movementSpeed *= vacumSpeedReduce;
+        _vacuumCollider.enabled = true;
+
+        vacuumParticles.Play();
+        playerAnimator.SetBool("Sucking", true);
+    }
+
+    private void StopSucking()
+    {
+        sucking = false;
+        movement.movementSpeed /= vacumSpeedReduce;
+        _vacuumCollider.enabled = false;
+
+        vacuumParticles.Stop();
+        playerAnimator.SetBool("Sucking", false);
+    }
+
+   
+    public void Stuck(Gem gem)
+    {
+        stuck = true;
+        vacuumParticles.Stop();
+        
+        movement.movementSpeed /= vacumSpeedReduce;
+        _vacuumCollider.enabled = false;
+
+        _gem = gem;
+    }
+
+    public void ResetAttack()
+    {
+        punching = false;
+    }
+
 }
