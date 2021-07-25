@@ -154,6 +154,7 @@ MonoBehaviour:
   stats:
     enemyHealth: 3
     personalSpace: 150
+    personalSpaceBack: 50
     enemyDamage: 1
     attackDelay: 1
     enemyVision: 200

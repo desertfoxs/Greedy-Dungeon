@@ -9,6 +9,7 @@ public class EnemyStats
 
     [Header("Settings")]
     public float personalSpace;
+    public float personalSpaceBack;
 
     [Header("Attack Settings")]
     public int enemyDamage;
