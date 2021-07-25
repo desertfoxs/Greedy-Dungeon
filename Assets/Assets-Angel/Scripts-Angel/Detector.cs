@@ -19,10 +19,10 @@ public class Detector : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        Debug.Log("el player toco el detector");
+        
         if (col.transform.tag == "Player")
         {
-            Debug.Log("el player toco el detector");
+            
             _manager.CambioDeSala(id);
 
         }
