@@ -6,11 +6,11 @@ using Cinemachine;
 public class GameManagerAngel : MonoBehaviour
 {
 
-    public Transform[] postSalas;
+    //public Transform[] postSalas;
     private int idSala;
 
-    private CinemachineVirtualCamera _followTarget;
-    private GameObject _vcam;
+    //private CinemachineVirtualCamera _followTarget;
+    //private GameObject _vcam;
 
     public GameObject _ghost;
     private Ghost _scriptGhost;
@@ -19,8 +19,8 @@ public class GameManagerAngel : MonoBehaviour
     void Start()
     {
         
-        _vcam = GameObject.FindGameObjectWithTag("Vcam");       
-        _followTarget = _vcam.GetComponent<CinemachineVirtualCamera>();
+        //_vcam = GameObject.FindGameObjectWithTag("Vcam");       
+        //_followTarget = _vcam.GetComponent<CinemachineVirtualCamera>();
 
         _scriptGhost= _ghost.GetComponent<Ghost>();
 
@@ -44,7 +44,7 @@ public class GameManagerAngel : MonoBehaviour
     {
         idSala = id;
 
-        _followTarget.Follow = postSalas[id];
+        //_followTarget.Follow = postSalas[id];
 
     }
 

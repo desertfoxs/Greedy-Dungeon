@@ -5,12 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Vcam
-  - Suckable
-  - Vacuum
   - Ghost
   - Detector
   - Gema
   - Enemy
+  - Suckable
+  - Vacuum
   layers:
   - Default
   - TransparentFX
@@ -22,6 +22,9 @@ TagManager:
   - Level
   - PlayerAttack
   - Enemy
+  - Detector
+  - Sala
+  - 
   - 
   - 
   - 

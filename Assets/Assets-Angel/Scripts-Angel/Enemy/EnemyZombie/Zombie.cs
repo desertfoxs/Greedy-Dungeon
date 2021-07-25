@@ -6,49 +6,56 @@ using UnityEngine.AI;
 public class Zombie : MyEnemy
 {
    
+
     private NavMeshAgent _agente;
-    private Transform _initialPosition;
+    private Vector3 _initialPosition;
+    private bool _attack = false;
+ 
 
     private void Awake()
     {
-        _agente = GetComponent<NavMeshAgent>();            
+        _agente = GetComponent<NavMeshAgent>();
+        
     }
 
 
     void Start()
     {
+        _initialPosition = transform.position;
+        
         _agente.updateRotation = false;
         _agente.updateUpAxis = false;
 
-        _initialPosition = gameObject.GetComponent<Transform>();
-
         _player = GameObject.FindGameObjectWithTag("Player");
+        
+        
+        //_rb = gameObject.GetComponent<Rigidbody2D>();
         //_animator = gameObject.GetComponent<Animator>();
         //_renderer = gameObject.GetComponent<SpriteRenderer>();
-        _rb = gameObject.GetComponent<Rigidbody2D>();
     }
-    
+
 
     private void Update()
     {
-        
-        if (IsInPersonalSpace())
+
+
+        if (IsInPersonalSpace() && !_attack)
         {
-            
-            CanSeePlayer();
-            _agente.SetDestination(_player.transform.position);
-            
+            _agente.destination = _player.transform.position;
         }
         else
         {
-            _agente.SetDestination(_initialPosition.position);
-            CanSeePlayer();
+            if (!_attack)
+            {
+
+                _agente.destination = _initialPosition;
+
+            }
         }
 
-       
+        CanSeePlayer();
         if (CanSeePlayer())
-        {
-            
+        {     
             transform.rotation = _player.transform.position.x > transform.position.x ? Quaternion.Euler(0, -180, 0) : Quaternion.Euler(0, 0, 0);
         }
             
@@ -57,7 +64,7 @@ public class Zombie : MyEnemy
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.transform.tag == "Player")
+        if(collision.transform.tag == "Player" && !_attack)
         {  
             StartCoroutine(Attack(stats.attackDelay));
         }
@@ -65,12 +72,15 @@ public class Zombie : MyEnemy
 
     protected IEnumerator Attack(float Time)
     {
-        
+        _attack = true;
         //ataque al jugador
+
+        _agente.destination = transform.position;
+        yield return new WaitForSeconds(Time);
+
+        _attack = false;
       
-        _agente.SetDestination(transform.position);
-        yield return new WaitForSeconds(Time);        
-        _agente.SetDestination(_player.transform.position);
+
         yield return null;
     }
 
