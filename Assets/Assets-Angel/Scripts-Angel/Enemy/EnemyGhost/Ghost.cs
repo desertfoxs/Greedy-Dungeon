@@ -10,6 +10,8 @@ public class Ghost : MonoBehaviour
 
     private int speed;
     private Rigidbody2D _rb;
+    private GameObject _player;
+    private PlayerMovement _scriptPlayer;
 
     //sirven para regular la velocidad del fantasma
     private int _salaPlayer;
@@ -27,7 +29,9 @@ public class Ghost : MonoBehaviour
         _gameManager = GameObject.FindGameObjectWithTag("GameController");
 
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        
+
+        _player = GameObject.FindGameObjectWithTag("Player");
+        _scriptPlayer = _player.GetComponent<PlayerMovement>();
     }
 
     
@@ -65,7 +69,7 @@ public class Ghost : MonoBehaviour
         {
             if (!_stun)
             {
-                //Player.Instakill
+                _scriptPlayer.Die();
             }
 
         }
@@ -79,8 +83,8 @@ public class Ghost : MonoBehaviour
     protected IEnumerator Stuneado(float Time)
     {
         _stun = true;
-        _spriteRenderer.color = Color.red;
 
+        _spriteRenderer.color = Color.red;
         yield return new WaitForSeconds(Time);
 
         _stun = false;
