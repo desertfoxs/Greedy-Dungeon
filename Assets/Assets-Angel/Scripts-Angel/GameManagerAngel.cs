@@ -31,6 +31,12 @@ public class GameManagerAngel : MonoBehaviour
 
     public static GameManagerAngel Instance { get { return _instance; } }
 
+    [Header("Sounds")]
+    public AudioClip coinClip;
+    public AudioClip deathClip;
+    public AudioClip hurtClip;
+    private AudioSource audioSource;
+
     void Awake()
     {
         if (_instance != null && _instance != this)
@@ -46,21 +52,21 @@ public class GameManagerAngel : MonoBehaviour
     void Start()
     {
         TextScore.text = Score.ToString();
-
+        audioSource = GetComponent<AudioSource>();
         //GameObject playerEntity = GameObject.FindGameObjectWithTag("Player");
         //player = playerEntity.GetComponent<Player>();
 
         //_vcam = GameObject.FindGameObjectWithTag("Vcam");       
         //_followTarget = _vcam.GetComponent<CinemachineVirtualCamera>();
 
-        //_scriptGhost = _ghost.GetComponent<Ghost>();
+        _scriptGhost = _ghost.GetComponent<Ghost>();
 
     }
 
     private void Update()
     {
-        //time += Time.deltaTime;
-    
+        time += Time.deltaTime;
+
         if (time >= 10f)
         {
             _ghost.SetActive(true);
@@ -73,6 +79,7 @@ public class GameManagerAngel : MonoBehaviour
 
     public void GrabCoin()
     {
+        audioSource.PlayOneShot(coinClip);
         Score++;
         TextScore.text = Score.ToString();
     }
@@ -81,7 +88,7 @@ public class GameManagerAngel : MonoBehaviour
     {
         GameObject life = playerLife[playerLife.Count - 1];
         playerLife.RemoveAt(playerLife.Count - 1);
-
+        audioSource.PlayOneShot(hurtClip);
         Destroy(life);
 
         if (Score - 5 < 0)
@@ -89,7 +96,9 @@ public class GameManagerAngel : MonoBehaviour
 
         else
             Score -= 5;
-
+        if(playerLife.Count == 0) {
+            audioSource.PlayOneShot(deathClip);
+        }
         TextScore.text = Score.ToString();
     }
 

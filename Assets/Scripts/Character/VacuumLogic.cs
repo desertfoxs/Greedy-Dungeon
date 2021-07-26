@@ -29,6 +29,11 @@ public class VacuumLogic : MonoBehaviour
     private float timeElapsed = 0;
 
     public bool punching = false;
+
+    [Header("Sounds")]
+    public AudioClip vacuumClip;
+    public AudioClip hitClip;
+    public AudioClip diamondShotClip;
     #endregion
 
     private void Start()
@@ -55,13 +60,12 @@ public class VacuumLogic : MonoBehaviour
             {
                 if (movement.IsAttackingDown())
                     playerAnimator.SetTrigger("DownAttack");
-
                 else
                 {
                     playerAnimator.SetTrigger("Attacking");
                     movement.PlayDust();
                 }
-
+                audioSource.PlayOneShot(hitClip);
                 punching = true;
             }
         }
@@ -87,6 +91,8 @@ public class VacuumLogic : MonoBehaviour
                     bool right = movement.gameObject.transform.localScale.x > 0;
                     _gem.FireGem(right ? Vector3.right : Vector3.left);
                 }
+                audioSource.PlayOneShot(diamondShotClip);
+                
                 stuck = false;
                 _gem = null;
                 punching = false;
@@ -103,6 +109,8 @@ public class VacuumLogic : MonoBehaviour
         sucking = true;
         movement.movementSpeed *= vacumSpeedReduce;
         _vacuumCollider.enabled = true;
+        audioSource.clip = vacuumClip;
+        audioSource.loop = true;
         audioSource.pitch = 1;
         audioSource.Play();
         vacuumParticles.Play();
@@ -116,6 +124,7 @@ public class VacuumLogic : MonoBehaviour
         movement.movementSpeed /= vacumSpeedReduce;
         _vacuumCollider.enabled = false;
         timeElapsed = 0;
+        audioSource.loop = false;
         audioSource.Stop();
         vacuumParticles.Stop();
         forceParticles.Stop();
