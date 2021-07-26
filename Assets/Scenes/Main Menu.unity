@@ -2838,7 +2838,6 @@ MonoBehaviour:
   selectedButton: {fileID: 798849463}
   buttons:
   - {fileID: 798849463}
-  - {fileID: 1842265987}
   - {fileID: 2042884818}
 --- !u!4 &1785277065
 Transform:
@@ -2873,7 +2872,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1842265983
 RectTransform:
   m_ObjectHideFlags: 0
