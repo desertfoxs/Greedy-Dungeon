@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using TMPro;
 
 public class GameManagerAngel : MonoBehaviour
 {
@@ -16,13 +17,43 @@ public class GameManagerAngel : MonoBehaviour
     private Ghost _scriptGhost;
     private float time;
 
+    [Header("Score")]
+    public static int Score;
+    public TextMeshProUGUI TextScore;
+
+    [Header("Scene Name")]
+    public string sceneName;
+
+    [Header("Player")]
+    //public GameUi gameUi;
+
+    private static GameManagerAngel _instance;
+
+    public static GameManagerAngel Instance { get { return _instance; } }
+
+    void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
+
     void Start()
     {
-        
+        //TextScore.text = Score.ToString();
+
+        //GameObject playerEntity = GameObject.FindGameObjectWithTag("Player");
+        //player = playerEntity.GetComponent<Player>();
+
         //_vcam = GameObject.FindGameObjectWithTag("Vcam");       
         //_followTarget = _vcam.GetComponent<CinemachineVirtualCamera>();
 
-        _scriptGhost= _ghost.GetComponent<Ghost>();
+        _scriptGhost = _ghost.GetComponent<Ghost>();
 
     }
 
@@ -37,6 +68,16 @@ public class GameManagerAngel : MonoBehaviour
         }
 
         
+
+    }
+
+    public void GrabCoin()
+    {
+        Score++;
+    }
+
+    public void PlayerHurt()
+    {
 
     }
 
