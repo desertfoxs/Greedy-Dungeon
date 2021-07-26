@@ -8,6 +8,8 @@ public class PlayerMovement : MonoBehaviour
 
     #region properties and fields
 
+    public int life = 3;
+
     public Animator playerAnimator;
     public CharacterController2D controller;
     public GameObject vacuum;
@@ -20,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     public float jumpHeight = 3f;
 
     public float fallTime = 0.5f;
+    public float hurtTime = 1f;
 
     public bool disableMomvement = false;
     private bool downAttack = false;
@@ -34,7 +37,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 _movement;
     private Vector3 _smothSpeed;
 
-    private bool right = true;
+    private bool _right = true;
+    private bool _hurt = false;
 
 
     #endregion
@@ -60,7 +64,18 @@ public class PlayerMovement : MonoBehaviour
 
         else
         {
-            _movement.x = Mathf.Clamp(_movement.x - (_movement.x > 0 ? 0.2f : -0.2f) * Time.deltaTime, 0, 0);
+            if (_hurt)
+            {
+
+                float dir = _right ? -1 : 1;
+
+                float smoothedMovementFactor = controller.isGrounded ? groundDamping : inAirDamping; // how fast do we change direction?
+                _movement.x = Mathf.Lerp(_movement.x, dir * 3, Time.deltaTime * smoothedMovementFactor);
+
+            }
+
+            else
+                _movement.x = Mathf.Clamp(_movement.x - (_movement.x > 0 ? 0.2f : -0.2f) * Time.deltaTime, 0, 0);
         }
 
         _movement.y += gravity * Time.deltaTime;
@@ -79,14 +94,14 @@ public class PlayerMovement : MonoBehaviour
         {
             Vector3 scale = this.transform.localScale;
             this.transform.localScale = new Vector3(Mathf.Abs(scale.x), scale.y, scale.z);
-            right = true;
+            _right = true;
         }
 
         else if (horDir < 0)
         {
             Vector3 scale = this.transform.localScale;
             this.transform.localScale = new Vector3(Mathf.Abs(scale.x) * -1, scale.y, scale.z);
-            right = false;
+            _right = false;
         }
 
 
@@ -131,7 +146,7 @@ public class PlayerMovement : MonoBehaviour
             float down = Input.GetAxisRaw("Vertical");
             if (down < 0 && !_vacuumLogic.sucking)
             {
-                vacuum.transform.rotation = Quaternion.Euler(0, 0, right ? -90f : 90f);
+                vacuum.transform.rotation = Quaternion.Euler(0, 0, _right ? -90f : 90f);
                 downAttack = true;
             }
 
@@ -152,6 +167,44 @@ public class PlayerMovement : MonoBehaviour
             _inputBuffer.Dequeue();
     }
 
+    public void GetHurt()
+    {
+        life--;
+        disableMomvement = true;
+
+        GameManager.Instance.PlayerHurt();
+
+        playerAnimator.SetFloat("Speed", 0);
+        
+        float dir = _right ? -1 : 1;
+
+        float smoothedMovementFactor = controller.isGrounded ? groundDamping : inAirDamping; // how fast do we change direction?
+        _movement.x = Mathf.Lerp(_movement.x, dir * 3, Time.deltaTime * smoothedMovementFactor);
+
+        _movement.y = Mathf.Sqrt(2f * .5f * -gravity);
+
+        if (life == 0)
+        {
+            Die();
+            return;
+        }
+
+        _hurt = true;
+        playerAnimator.SetTrigger("Hurt");
+        StartCoroutine(StopHurting());
+    }
+
+    public void Die()
+    {
+        _movement = Vector3.zero;
+        playerAnimator.SetTrigger("Death");
+    }
+
+    public void Disapear()
+    {
+        gameObject.SetActive(false);
+    }
+
     public void BounceUpwards()
     {
         _movement.y = Mathf.Sqrt(2f * jumpHeight * -gravity);
@@ -170,6 +223,13 @@ public class PlayerMovement : MonoBehaviour
     public void EnableAttack()
     {
         _vacuumLogic.ResetAttack();
+    }
+
+    private IEnumerator StopHurting()
+    {
+        yield return new WaitForSeconds(hurtTime);
+        disableMomvement = false;
+        _hurt = false;
     }
 
     private IEnumerator SetFalling()

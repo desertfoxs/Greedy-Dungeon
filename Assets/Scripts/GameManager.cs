@@ -43,4 +43,9 @@ public class GameManager : MonoBehaviour
     {
         Score++;
     }
+
+    public void PlayerHurt()
+    {
+
+    }
 }
