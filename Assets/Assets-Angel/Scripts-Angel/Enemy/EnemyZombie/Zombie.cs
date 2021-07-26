@@ -10,7 +10,8 @@ public class Zombie : MyEnemy
     private NavMeshAgent _agente;
     private Vector3 _initialPosition;
     private bool _attack = false;
- 
+
+    //private Animator _anim;
 
     private void Awake()
     {
@@ -27,10 +28,11 @@ public class Zombie : MyEnemy
         _agente.updateUpAxis = false;
 
         _player = GameObject.FindGameObjectWithTag("Player");
-        
-        
+        gameObject.GetComponent<Animator>().SetBool("Move", false);
+
+        //_anim = gameObject.GetComponent<Animator>();
+
         //_rb = gameObject.GetComponent<Rigidbody2D>();
-        //_animator = gameObject.GetComponent<Animator>();
         //_renderer = gameObject.GetComponent<SpriteRenderer>();
     }
 
@@ -42,6 +44,9 @@ public class Zombie : MyEnemy
         if (IsInPersonalSpace() && !_attack)
         {
             _agente.destination = _player.transform.position;
+
+            gameObject.GetComponent<Animator>().SetBool("Move", true);
+            transform.rotation = _player.transform.position.x > transform.position.x ? Quaternion.Euler(0, -180, 0) : Quaternion.Euler(0, 0, 0);
         }
         else
         {
@@ -49,8 +54,13 @@ public class Zombie : MyEnemy
             {
 
                 _agente.destination = _initialPosition;
-
+                gameObject.GetComponent<Animator>().SetBool("Move", true);
+                transform.rotation = _initialPosition.x > transform.position.x ? Quaternion.Euler(0, -180, 0) : Quaternion.Euler(0, 0, 0);
             }
+        }
+        if(_initialPosition.x == transform.position.x)
+        {
+            gameObject.GetComponent<Animator>().SetBool("Move", false);
         }
 
         CanSeePlayer();
@@ -76,8 +86,11 @@ public class Zombie : MyEnemy
         //ataque al jugador
 
         _agente.destination = transform.position;
+        gameObject.GetComponent<Animator>().SetBool("Move", false);
+
         yield return new WaitForSeconds(Time);
 
+        gameObject.GetComponent<Animator>().SetBool("Move", true);
         _attack = false;
       
 

@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 7582684191102758443}
   - component: {fileID: 7582684191102758440}
   - component: {fileID: 7582684191102758444}
-  m_Layer: 3
+  - component: {fileID: 2025461466}
+  m_Layer: 9
   m_Name: Zombie
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -74,8 +75,9 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 21300000, guid: 25d64af3b9ddf3547b2857ff45cc17bb, type: 3}
-  m_Color: {r: 0.5630519, g: 0.9433962, b: 0, a: 1}
+  m_Sprite: {fileID: -1234415736162377994, guid: 496acbff17986b94eb453912e39df5c9,
+    type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -98,18 +100,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.68130493, y: -1.1581879}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 21.25, y: 38.75}
+    oldSize: {x: 26, y: 34}
     newSize: {x: 17, y: 31}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 21.25, y: 38.75}
+  m_Size: {x: 13.347046, y: 31.528336}
   m_EdgeRadius: 0
 --- !u!195 &7582684191102758440
 NavMeshAgent:
@@ -154,6 +156,7 @@ MonoBehaviour:
   stats:
     enemyHealth: 3
     personalSpace: 150
+    personalSpaceBack: 50
     enemyDamage: 1
     attackDelay: 1
     enemyVision: 200
@@ -162,3 +165,24 @@ MonoBehaviour:
   wanderRestTime: 3
   needsWanderDirection: 1
   wanderTarget: {x: 0, y: 0, z: 0}
+  pushForce: 1
+  pushVelocity: 1
+--- !u!95 &2025461466
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7582684191102758441}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8c4d668c6c40e074d820e21f3b85b112, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
