@@ -10,6 +10,8 @@ public class PlayerMovement : MonoBehaviour
 
     public int life = 3;
 
+    public ParticleSystem dustParticles;
+
     public Animator playerAnimator;
     public CharacterController2D controller;
     public GameObject vacuum;
@@ -52,6 +54,9 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (controller.becameGrounded)
+            PlayDust();
+
         if (!disableMomvement)
         {
             if (controller.isGrounded)
@@ -90,18 +95,22 @@ public class PlayerMovement : MonoBehaviour
 
         playerAnimator.SetFloat("Speed", Mathf.Abs(horDir));
 
-        if (horDir > 0)
+        if (horDir > 0 && !_right)
         {
             Vector3 scale = this.transform.localScale;
             this.transform.localScale = new Vector3(Mathf.Abs(scale.x), scale.y, scale.z);
+
             _right = true;
+            PlayDust();
         }
 
-        else if (horDir < 0)
+        else if (horDir < 0 && _right)
         {
             Vector3 scale = this.transform.localScale;
             this.transform.localScale = new Vector3(Mathf.Abs(scale.x) * -1, scale.y, scale.z);
+            
             _right = false;
+            PlayDust();
         }
 
 
@@ -139,6 +148,8 @@ public class PlayerMovement : MonoBehaviour
 
                 playerAnimator.SetBool("Falling", false);
                 StartCoroutine(SetFalling());
+
+                PlayDust();
             }
         }
         else
@@ -223,6 +234,11 @@ public class PlayerMovement : MonoBehaviour
     public void EnableAttack()
     {
         _vacuumLogic.ResetAttack();
+    }
+
+    public void PlayDust()
+    {
+        dustParticles.Play();
     }
 
     private IEnumerator StopHurting()

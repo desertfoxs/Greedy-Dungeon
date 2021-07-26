@@ -12,6 +12,7 @@ public class VacuumLogic : MonoBehaviour
     public PlayerMovement movement;
 
     public ParticleSystem vacuumParticles;
+    public ParticleSystem forceParticles;
 
     public Animator playerAnimator;
 
@@ -56,7 +57,10 @@ public class VacuumLogic : MonoBehaviour
                     playerAnimator.SetTrigger("DownAttack");
 
                 else
+                {
                     playerAnimator.SetTrigger("Attacking");
+                    movement.PlayDust();
+                }
 
                 punching = true;
             }
@@ -90,6 +94,7 @@ public class VacuumLogic : MonoBehaviour
         audioSource.pitch = 1;
         audioSource.Play();
         vacuumParticles.Play();
+        forceParticles.Play();
         playerAnimator.SetBool("Sucking", true);
     }
 
@@ -101,6 +106,7 @@ public class VacuumLogic : MonoBehaviour
         timeElapsed = 0;
         audioSource.Stop();
         vacuumParticles.Stop();
+        forceParticles.Stop();
         playerAnimator.SetBool("Sucking", false);
     }
 

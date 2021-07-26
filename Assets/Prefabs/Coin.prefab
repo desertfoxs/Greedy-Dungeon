@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5224245816598833036}
   - component: {fileID: 5224245816598833043}
   - component: {fileID: 5224245816598833042}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Coin
   m_TagString: Suckable
   m_Icon: {fileID: 0}
@@ -97,9 +97,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a395b26968cb484390e950952824274, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1.5
+  moveSpeed: 1
+  rotSpeed: 2
   stopMovingTime: 0.3
-  destroyDistance: 1
+  destroyDistance: 1.5
 --- !u!60 &5224245816598833042
 PolygonCollider2D:
   m_ObjectHideFlags: 0
