@@ -172,7 +172,7 @@ public class PlayerMovement : MonoBehaviour
         life--;
         disableMomvement = true;
 
-        GameManager.Instance.PlayerHurt();
+        GameManagerAngel.Instance.PlayerHurt();
 
         playerAnimator.SetFloat("Speed", 0);
         

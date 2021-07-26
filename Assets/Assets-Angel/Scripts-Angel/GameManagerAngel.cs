@@ -25,7 +25,7 @@ public class GameManagerAngel : MonoBehaviour
     public string sceneName;
 
     [Header("Player")]
-    //public GameUi gameUi;
+    public List<GameObject> playerLife;
 
     private static GameManagerAngel _instance;
 
@@ -45,7 +45,7 @@ public class GameManagerAngel : MonoBehaviour
 
     void Start()
     {
-        //TextScore.text = Score.ToString();
+        TextScore.text = Score.ToString();
 
         //GameObject playerEntity = GameObject.FindGameObjectWithTag("Player");
         //player = playerEntity.GetComponent<Player>();
@@ -53,13 +53,13 @@ public class GameManagerAngel : MonoBehaviour
         //_vcam = GameObject.FindGameObjectWithTag("Vcam");       
         //_followTarget = _vcam.GetComponent<CinemachineVirtualCamera>();
 
-        _scriptGhost = _ghost.GetComponent<Ghost>();
+        //_scriptGhost = _ghost.GetComponent<Ghost>();
 
     }
 
     private void Update()
     {
-        time += Time.deltaTime;
+        //time += Time.deltaTime;
     
         if (time >= 10f)
         {
@@ -74,11 +74,23 @@ public class GameManagerAngel : MonoBehaviour
     public void GrabCoin()
     {
         Score++;
+        TextScore.text = Score.ToString();
     }
 
     public void PlayerHurt()
     {
+        GameObject life = playerLife[playerLife.Count - 1];
+        playerLife.RemoveAt(playerLife.Count - 1);
 
+        Destroy(life);
+
+        if (Score - 5 < 0)
+            Score = 0;
+
+        else
+            Score -= 5;
+
+        TextScore.text = Score.ToString();
     }
 
     public void CambioDeSala(int id)
