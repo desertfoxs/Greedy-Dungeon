@@ -28,7 +28,7 @@ public class Coin : MonoBehaviour
 
             if (Vector3.Distance(transform.position, _suckCenter) < destroyDistance)
             {
-                GameManager.Instance.GrabCoin();
+                GameManagerAngel.Instance.GrabCoin();
                 Destroy(gameObject);
             }
         }
