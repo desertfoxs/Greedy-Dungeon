@@ -37,6 +37,7 @@ public class GameManagerAngel : MonoBehaviour
     public AudioClip hurtClip;
     private AudioSource audioSource;
 
+
     void Awake()
     {
         if (_instance != null && _instance != this)
