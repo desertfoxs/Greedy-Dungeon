@@ -1,31 +1,25 @@
 fileFormatVersion: 2
-guid: 61c18ae6c6d6e6c4bac1495112f72942
+guid: 496acbff17986b94eb453912e39df5c9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7404359423806121290
-    second: Head Ghosth Sprite_32x33; Sheet_256x33_0
+      213: 8728815535339406163
+    second: Golden Skeleton Sprite_26x34; Sheet_156x34 _0
   - first:
-      213: 2708569816558297101
-    second: Head Ghosth Sprite_32x33; Sheet_256x33_1
+      213: -1234415736162377994
+    second: Golden Skeleton Sprite_26x34; Sheet_156x34 _1
   - first:
-      213: -3104824681138852856
-    second: Head Ghosth Sprite_32x33; Sheet_256x33_2
+      213: -1889967691592472328
+    second: Golden Skeleton Sprite_26x34; Sheet_156x34 _2
   - first:
-      213: 6241052523062690203
-    second: Head Ghosth Sprite_32x33; Sheet_256x33_3
+      213: 8336687309942649729
+    second: Golden Skeleton Sprite_26x34; Sheet_156x34 _3
   - first:
-      213: 5425803933214259730
-    second: Head Ghosth Sprite_32x33; Sheet_256x33_4
+      213: -8319170235790189480
+    second: Golden Skeleton Sprite_26x34; Sheet_156x34 _4
   - first:
-      213: -7710489146616469124
-    second: Head Ghosth Sprite_32x33; Sheet_256x33_5
-  - first:
-      213: -5836521698922869360
-    second: Head Ghosth Sprite_32x33; Sheet_256x33_6
-  - first:
-      213: 6458190017634707580
-    second: Head Ghosth Sprite_32x33; Sheet_256x33_7
+      213: 95922303423506327
+    second: Golden Skeleton Sprite_26x34; Sheet_156x34 _5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -127,13 +121,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Head Ghosth Sprite_32x33; Sheet_256x33_0
+      name: Golden Skeleton Sprite_26x34; Sheet_156x34 _0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
-        height: 33
+        width: 26
+        height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,20 +135,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6ba58b2855e6e3990800000000000000
-      internalID: -7404359423806121290
+      spriteID: 35301dd6b7bf22970800000000000000
+      internalID: 8728815535339406163
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Head Ghosth Sprite_32x33; Sheet_256x33_1
+      name: Golden Skeleton Sprite_26x34; Sheet_156x34 _1
       rect:
         serializedVersion: 2
-        x: 32
+        x: 26
         y: 0
-        width: 32
-        height: 33
+        width: 26
+        height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -162,20 +156,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d006d45c5e5c69520800000000000000
-      internalID: 2708569816558297101
+      spriteID: 6fe93ec9d697edee0800000000000000
+      internalID: -1234415736162377994
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Head Ghosth Sprite_32x33; Sheet_256x33_2
+      name: Golden Skeleton Sprite_26x34; Sheet_156x34 _2
       rect:
         serializedVersion: 2
-        x: 64
+        x: 52
         y: 0
-        width: 32
-        height: 33
+        width: 26
+        height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -183,20 +177,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 80c6ade076279e4d0800000000000000
-      internalID: -3104824681138852856
+      spriteID: 8f86aa1e56c75c5e0800000000000000
+      internalID: -1889967691592472328
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Head Ghosth Sprite_32x33; Sheet_256x33_3
+      name: Golden Skeleton Sprite_26x34; Sheet_156x34 _3
       rect:
         serializedVersion: 2
-        x: 96
+        x: 78
         y: 0
-        width: 32
-        height: 33
+        width: 26
+        height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -204,20 +198,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b9105b5043cac9650800000000000000
-      internalID: 6241052523062690203
+      spriteID: 18373a050fcd1b370800000000000000
+      internalID: 8336687309942649729
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Head Ghosth Sprite_32x33; Sheet_256x33_4
+      name: Golden Skeleton Sprite_26x34; Sheet_156x34 _4
       rect:
         serializedVersion: 2
-        x: 128
+        x: 104
         y: 0
-        width: 32
-        height: 33
+        width: 26
+        height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -225,20 +219,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 21a372c1ee35c4b40800000000000000
-      internalID: 5425803933214259730
+      spriteID: 85c19b55fbe5c8c80800000000000000
+      internalID: -8319170235790189480
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Head Ghosth Sprite_32x33; Sheet_256x33_5
+      name: Golden Skeleton Sprite_26x34; Sheet_156x34 _5
       rect:
         serializedVersion: 2
-        x: 160
+        x: 130
         y: 0
-        width: 32
-        height: 33
+        width: 26
+        height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -246,50 +240,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c79ab6b19f6def490800000000000000
-      internalID: -7710489146616469124
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Head Ghosth Sprite_32x33; Sheet_256x33_6
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 0
-        width: 32
-        height: 33
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 09dc7d32072800fa0800000000000000
-      internalID: -5836521698922869360
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Head Ghosth Sprite_32x33; Sheet_256x33_7
-      rect:
-        serializedVersion: 2
-        x: 224
-        y: 0
-        width: 32
-        height: 33
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c782715aa9910a950800000000000000
-      internalID: 6458190017634707580
+      spriteID: 7976895a3d8c45100800000000000000
+      internalID: 95922303423506327
       vertices: []
       indices: 
       edges: []

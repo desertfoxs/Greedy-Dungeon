@@ -26,7 +26,7 @@ public class Momia : MyEnemy
         _agente.updateUpAxis = false;
         
         _player = GameObject.FindGameObjectWithTag("Player");
-
+        gameObject.GetComponent<Animator>().SetBool("Move", false);
 
         //_rb = gameObject.GetComponent<Rigidbody2D>();
         //_animator = gameObject.GetComponent<Animator>();
@@ -46,6 +46,7 @@ public class Momia : MyEnemy
                 if(Vector3.Distance(_player.transform.position, transform.position) < stats.personalSpaceBack)
                 {
                     _agente.destination = _player.transform.position;
+                    gameObject.GetComponent<Animator>().SetBool("Move", true);
                     transform.rotation = _player.transform.position.x > transform.position.x ? Quaternion.Euler(0, -180, 0) : Quaternion.Euler(0, 0, 0);
                 }
                 
@@ -53,6 +54,7 @@ public class Momia : MyEnemy
             else
             {
                 _agente.destination = _player.transform.position;
+                gameObject.GetComponent<Animator>().SetBool("Move", true);
                 transform.rotation = _player.transform.position.x > transform.position.x ? Quaternion.Euler(0, -180, 0) : Quaternion.Euler(0, 0, 0);
             }
         }
@@ -66,6 +68,7 @@ public class Momia : MyEnemy
                 {
                   
                    _agente.destination = targetA.position;
+                    gameObject.GetComponent<Animator>().SetBool("Move", true);
                     //mira hacia la izquierda
                     transform.rotation = Quaternion.Euler(0, 0, 0);
                 }
@@ -74,6 +77,7 @@ public class Momia : MyEnemy
                 {
                    
                     _agente.destination = targetB.position;
+                    gameObject.GetComponent<Animator>().SetBool("Move", true);
                     //mira hacia la derecha
                     transform.rotation = Quaternion.Euler(0, -180, 0);
                 }
@@ -91,6 +95,7 @@ public class Momia : MyEnemy
                 }
             }
         }
+
 
     }
 
@@ -127,8 +132,9 @@ public class Momia : MyEnemy
         //ataque al jugador
 
         _agente.destination = transform.position;
+        gameObject.GetComponent<Animator>().SetBool("Move", false);
         yield return new WaitForSeconds(Time);
-
+        gameObject.GetComponent<Animator>().SetBool("Move", true);
         _attack = false;
 
 
