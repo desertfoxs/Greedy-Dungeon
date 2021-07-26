@@ -96,7 +96,27 @@ public class Momia : MyEnemy
             }
         }
 
+        if (_pushBack)
+        {
+            transform.position = Vector3.Lerp(transform.position, _pushBackPosition, pushVelocity * Time.deltaTime);
+        }
 
+
+    }
+
+    public override void PushBack(Vector3 attackDir)
+    {
+        _agente.isStopped = true;
+        _pushBack = true;
+        _pushBackPosition = transform.position + (attackDir * pushForce);
+
+        Invoke("StopPushBack", 1f);
+    }
+
+    private void StopPushBack()
+    {
+        _pushBack = false;
+        _agente.isStopped = false;
     }
 
     //Logica de la deteccion de si el player esta a su espalda

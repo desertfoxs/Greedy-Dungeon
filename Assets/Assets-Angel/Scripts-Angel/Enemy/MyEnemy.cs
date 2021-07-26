@@ -43,7 +43,7 @@ public class MyEnemy : MonoBehaviour
 
     public float pushForce = 1f;
     public float pushVelocity = 1f;
-    private Vector3 _pushBackPosition;
+    protected Vector3 _pushBackPosition;
     protected bool _pushBack = false;
  
 
@@ -106,7 +106,7 @@ public class MyEnemy : MonoBehaviour
 
     ////////////////// Hurt Methods //////////////////////
 
-    public void PushBack(Vector3 attackDir)
+    public virtual void PushBack(Vector3 attackDir)
     {
         _pushBack = true;
         _pushBackPosition = transform.position + (attackDir * pushForce);
@@ -119,7 +119,10 @@ public class MyEnemy : MonoBehaviour
             _waitForHurt = true;
 
             if (damage)
+            {
                 stats.enemyHealth -= 1;
+                Debug.Log("Enemy damaged: " + stats.enemyHealth);
+            }
 
             if (stats.enemyHealth <= 0)
                 Die();

@@ -182,6 +182,7 @@ public class PlayerMovement : MonoBehaviour
     {
         life--;
         disableMomvement = true;
+        _vacuumLogic.punching = true;
 
         GameManagerAngel.Instance.PlayerHurt();
 
@@ -190,9 +191,19 @@ public class PlayerMovement : MonoBehaviour
         float dir = _right ? -1 : 1;
 
         float smoothedMovementFactor = controller.isGrounded ? groundDamping : inAirDamping; // how fast do we change direction?
-        _movement.x = Mathf.Lerp(_movement.x, dir * 3, Time.deltaTime * smoothedMovementFactor);
 
-        _movement.y = Mathf.Sqrt(2f * .5f * -gravity);
+        if (controller.isGrounded)
+        {
+            _movement.x = Mathf.Lerp(_movement.x, dir * 3, Time.deltaTime * smoothedMovementFactor);
+
+            _movement.y = Mathf.Sqrt(2f * (jumpHeight / 2) * -gravity);
+        }
+
+        else {
+            _movement.x = Mathf.Lerp(_movement.x, dir * movementSpeed, Time.deltaTime * smoothedMovementFactor);
+
+            BounceUpwards();
+        }
 
         if (life == 0)
         {

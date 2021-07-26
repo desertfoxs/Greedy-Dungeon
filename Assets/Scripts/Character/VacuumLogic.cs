@@ -28,7 +28,7 @@ public class VacuumLogic : MonoBehaviour
     public float pitchDuration = 2f;
     private float timeElapsed = 0;
 
-    private bool punching = false;
+    public bool punching = false;
     #endregion
 
     private void Start()
@@ -72,9 +72,21 @@ public class VacuumLogic : MonoBehaviour
                 punching = true;
                 movement.movementSpeed *= vacumSpeedReduce;
                 StopSucking();
-                bool right = movement.gameObject.transform.localScale.x > 0;
-                _gem.FireGem(right ? Vector3.right : Vector3.left);
 
+
+                float down = Input.GetAxisRaw("Vertical");
+
+                if (down < 0)
+                {
+                    playerAnimator.SetTrigger("DownAttack");
+                    movement.BounceUpwards();
+                    _gem.FireGem(Vector3.down);
+                }
+                else
+                {
+                    bool right = movement.gameObject.transform.localScale.x > 0;
+                    _gem.FireGem(right ? Vector3.right : Vector3.left);
+                }
                 stuck = false;
                 _gem = null;
                 punching = false;

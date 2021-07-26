@@ -5624,7 +5624,7 @@ PrefabInstance:
     - target: {fileID: 7582684191102758443, guid: 8d5056f13b1544445bfb54fc3b40c89a,
         type: 3}
       propertyPath: m_IsTrigger
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7582684191102758445, guid: 8d5056f13b1544445bfb54fc3b40c89a,
         type: 3}
@@ -8260,21 +8260,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Zombie (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7582684191102758441, guid: 8d5056f13b1544445bfb54fc3b40c89a,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 7582684191102758441, guid: 8d5056f13b1544445bfb54fc3b40c89a,
-        type: 3}
-      propertyPath: m_TagString
-      value: Enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 7582684191102758443, guid: 8d5056f13b1544445bfb54fc3b40c89a,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7582684191102758445, guid: 8d5056f13b1544445bfb54fc3b40c89a,
         type: 3}

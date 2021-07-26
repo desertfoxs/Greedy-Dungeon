@@ -14,6 +14,8 @@ public class Gem : MonoBehaviour
     public float fireTime = 2f;
     public float fireSpeed = 4f;
 
+    public float durability = 2f;
+
     private Vector3 _suckCenter = Vector3.zero;
     private Vector3 _fireDir = Vector3.zero;
     private VacuumLogic vacuum;
@@ -83,10 +85,18 @@ public class Gem : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             MyEnemy enemy = collision.gameObject.GetComponent<MyEnemy>();
-            Vector3 attackDir = new Vector3(_fireDir.x * -1, .5f, 0);
+            Vector3 attackDir = new Vector3(_fireDir.x * 1, .5f, 0);
             enemy.PushBack(attackDir);
 
             enemy.GetHit(true);
+
+            durability--;
+
+            if (durability == 0)
+            {
+                gameObject.SetActive(false);
+                Destroy(gameObject, 1f);
+            }
         }
         else
         {

@@ -166,7 +166,7 @@ MonoBehaviour:
   needsWanderDirection: 1
   wanderTarget: {x: 0, y: 0, z: 0}
   pushForce: 1
-  pushVelocity: 1
+  pushVelocity: 20
 --- !u!95 &2025461466
 Animator:
   serializedVersion: 3
