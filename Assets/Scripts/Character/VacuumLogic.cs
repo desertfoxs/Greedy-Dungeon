@@ -12,6 +12,7 @@ public class VacuumLogic : MonoBehaviour
     public PlayerMovement movement;
 
     public ParticleSystem vacuumParticles;
+
     public Animator playerAnimator;
 
     public bool sucking = false;
@@ -21,12 +22,18 @@ public class VacuumLogic : MonoBehaviour
     private bool stuck = false;
     private Gem _gem;
 
+    private AudioSource audioSource;
+    public float maxSoundPitch = 2f;
+    public float pitchDuration = 2f;
+    private float timeElapsed = 0;
+
     private bool punching = false;
     #endregion
 
     private void Start()
     {
         _vacuumCollider = vacuumPoint.GetComponent<PolygonCollider2D>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -54,7 +61,6 @@ public class VacuumLogic : MonoBehaviour
                 punching = true;
             }
         }
-
         else
         {
             if (Input.GetButton("Fire"))
@@ -68,7 +74,11 @@ public class VacuumLogic : MonoBehaviour
                 stuck = false;
                 _gem = null;
                 punching = false;
-            } 
+            }
+        }
+
+        if(sucking) {
+            audioSource.pitch = GetVacuumSoundPitch();
         }
     }
 
@@ -77,7 +87,8 @@ public class VacuumLogic : MonoBehaviour
         sucking = true;
         movement.movementSpeed *= vacumSpeedReduce;
         _vacuumCollider.enabled = true;
-
+        audioSource.pitch = 1;
+        audioSource.Play();
         vacuumParticles.Play();
         playerAnimator.SetBool("Sucking", true);
     }
@@ -87,7 +98,8 @@ public class VacuumLogic : MonoBehaviour
         sucking = false;
         movement.movementSpeed /= vacumSpeedReduce;
         _vacuumCollider.enabled = false;
-
+        timeElapsed = 0;
+        audioSource.Stop();
         vacuumParticles.Stop();
         playerAnimator.SetBool("Sucking", false);
     }
@@ -107,6 +119,16 @@ public class VacuumLogic : MonoBehaviour
     public void ResetAttack()
     {
         punching = false;
+    }
+
+    private float GetVacuumSoundPitch() {
+        if (timeElapsed < pitchDuration) {
+            float pitch = Mathf.Lerp(1, maxSoundPitch, timeElapsed / pitchDuration);
+            timeElapsed += Time.deltaTime;
+            return pitch;
+        } else {
+            return maxSoundPitch;
+        }
     }
 
 }
