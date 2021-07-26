@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using TMPro;
 
 public class GameManagerAngel : MonoBehaviour
 {
@@ -16,19 +17,49 @@ public class GameManagerAngel : MonoBehaviour
     private Ghost _scriptGhost;
     private float time;
 
+    [Header("Score")]
+    public static int Score;
+    public TextMeshProUGUI TextScore;
+
+    [Header("Scene Name")]
+    public string sceneName;
+
+    [Header("Player")]
+    public List<GameObject> playerLife;
+
+    private static GameManagerAngel _instance;
+
+    public static GameManagerAngel Instance { get { return _instance; } }
+
+    void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
+
     void Start()
     {
-        
+        TextScore.text = Score.ToString();
+
+        //GameObject playerEntity = GameObject.FindGameObjectWithTag("Player");
+        //player = playerEntity.GetComponent<Player>();
+
         //_vcam = GameObject.FindGameObjectWithTag("Vcam");       
         //_followTarget = _vcam.GetComponent<CinemachineVirtualCamera>();
 
-        _scriptGhost= _ghost.GetComponent<Ghost>();
+        //_scriptGhost = _ghost.GetComponent<Ghost>();
 
     }
 
     private void Update()
     {
-        time += Time.deltaTime;
+        //time += Time.deltaTime;
     
         if (time >= 10f)
         {
@@ -38,6 +69,28 @@ public class GameManagerAngel : MonoBehaviour
 
         
 
+    }
+
+    public void GrabCoin()
+    {
+        Score++;
+        TextScore.text = Score.ToString();
+    }
+
+    public void PlayerHurt()
+    {
+        GameObject life = playerLife[playerLife.Count - 1];
+        playerLife.RemoveAt(playerLife.Count - 1);
+
+        Destroy(life);
+
+        if (Score - 5 < 0)
+            Score = 0;
+
+        else
+            Score -= 5;
+
+        TextScore.text = Score.ToString();
     }
 
     public void CambioDeSala(int id)
